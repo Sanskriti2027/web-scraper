@@ -1,0 +1,10 @@
+from googleapiclient.discovery import build
+
+api_key = 'YOUR_API_KEY'
+service = build('mybusiness', 'v4', developerKey=api_key)
+def get_business_info(service, location_id):
+    result = service.accounts().locations().get(
+        name=f'accounts/{location_id}',
+        readMask='name,storeCode,locationName,primaryPhone,address,websiteUri'
+    ).execute()
+    return result
